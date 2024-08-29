@@ -1,0 +1,17 @@
+{
+  "name": "goit-node-js",
+  "version": "1.0.0",
+  "description": "goit-node-js",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.2.0",
+    "@faker-js/faker": "^8.4.1",
+    "eslint": "^9.2.0",
+    "globals": "^15.1.0"
+  }
+}
