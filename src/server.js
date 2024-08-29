@@ -24,6 +24,12 @@ const setupServer = () => {
     }),
   );
 
+  app.get('/', (req, res) => {
+    res.json({
+      message: 'Hello in my HW_2',
+    });
+  });
+
   app.get('/contacts', async (req, res) => {
     const students = await getAllContacts();
 
