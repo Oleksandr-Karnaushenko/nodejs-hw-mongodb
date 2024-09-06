@@ -4,7 +4,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 import env from './utils/env.js';
-import { getAllContacts, getContactById } from './services/contacts.js';
+import contactsRouter from './routers/contacts.js';
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import { errorHandler } from './middlewares/errorHandler.js';
 
 dotenv.config();
 
@@ -26,44 +28,15 @@ const setupServer = () => {
 
   app.get('/', (req, res) => {
     res.json({
-      message: 'Hello in my HW_2',
+      message: 'Hello in my HW_3',
     });
   });
 
-  app.get('/contacts', async (req, res) => {
-    const students = await getAllContacts();
+  app.use(contactsRouter);
 
-    res.status(200).json({
-      status: 200,
-      message: 'Successfully found contacts!',
-      data: students,
-    });
-    console.log(students);
-  });
+  app.use('*', notFoundHandler);
 
-  app.get('/contacts/:contactId', async (req, res, next) => {
-    const { contactId } = req.params;
-    const contact = await getContactById(contactId);
-
-    if (!contact) {
-      res.status(404).json({
-        message: 'Contact not found',
-      });
-      return;
-    }
-
-    res.status(200).json({
-      status: 200,
-      message: 'Successfully found contact with id {contactId}!',
-      data: contact,
-    });
-  });
-
-  app.use('*', (req, res, next) => {
-    res.status(404).json({
-      message: 'Route not found',
-    });
-  });
+  app.use(errorHandler);
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
