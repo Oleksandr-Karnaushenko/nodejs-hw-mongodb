@@ -8,22 +8,21 @@ const parseContactType = (type) => {
   if (isContactType(type)) return type;
 };
 
-// const parseIsFavourite = (bool) => {
-//   const isString = typeof bool === 'string';
-//   if (!isString) return;
+const parseIsFavourite = (bool) => {
+  const isString = typeof bool === 'string';
+  if (!isString) return;
 
-//   console.log(`parsed: ${bool}`);
-
-//   return true;
-// };
+  return bool;
+};
 
 export const parseContactsFilterParams = (query) => {
   const { contactType, isFavourite } = query;
 
   const parsedContactType = parseContactType(contactType);
-  //   const parsedIsFavourite = parseIsFavourite(isFavourite);
+  const parsedIsFavourite = parseIsFavourite(isFavourite);
+  console.log(`parsed: ${parsedIsFavourite}`);
   return {
     contactType: parsedContactType,
-    // isFavourite: parsedIsFavourite,
+    isFavourite: parsedIsFavourite,
   };
 };
