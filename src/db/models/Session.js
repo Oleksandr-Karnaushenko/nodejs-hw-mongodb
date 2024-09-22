@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-const sessionsShema = new Schema(
+const sessionShema = new Schema(
   {
     userId: { type: String, required: true },
     accessToken: { type: String, required: true },
@@ -13,4 +13,4 @@ const sessionsShema = new Schema(
     versionKey: false,
   },
 );
-export const SessionsCollection = model('sessions', sessionsShema);
+export const SessionsCollection = model('session', sessionShema);

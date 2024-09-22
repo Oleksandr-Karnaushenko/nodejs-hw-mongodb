@@ -3,7 +3,7 @@ import { model, Schema } from 'mongoose';
 import { emailRegexp } from '../../constants/user.js';
 import { ROLES } from '../../constants/index.js';
 
-const usersShema = new Schema(
+const userShema = new Schema(
   {
     name: {
       type: String,
@@ -30,4 +30,4 @@ const usersShema = new Schema(
     versionKey: false,
   },
 );
-export const UsersCollection = model('users', usersShema);
+export const UserCollection = model('user', usersShema);
