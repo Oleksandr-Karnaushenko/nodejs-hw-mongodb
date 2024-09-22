@@ -29,7 +29,6 @@ export const getContactsController = async (req, res) => {
     message: 'Successfully found contacts!',
     data: contacts,
   });
-  console.log(contacts);
 };
 
 export const getContactsByIdController = async (req, res, next) => {
