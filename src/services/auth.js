@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import createHttpError from 'http-errors';
 import { randomBytes } from 'crypto';
 
-import { UsersCollection } from '../db/models/user.js';
+import { UsersCollection } from '../db/models/User.js';
 import { FIFTEEN_MINUTES, THIRTY_DAY } from '../constants/index.js';
 import { SessionsCollection } from '../db/models/Session.js';
 
