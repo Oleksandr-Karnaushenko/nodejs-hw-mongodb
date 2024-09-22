@@ -1,4 +1,4 @@
-import { ContactsCollection } from '../db/models/contacts.js';
+import { ContactsCollection } from '../db/models/Contacts.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 
 export const getContacts = async ({
@@ -18,8 +18,11 @@ export const getContacts = async ({
   }
 
   if (filter.isFavourite) {
-    console.log('object');
     contactsQuery.where('isFavourite').equals(filter.isFavourite);
+  }
+
+  if (filter.userId) {
+    contactsQuery.where('userId').equals(filter.userId);
   }
 
   const [contactsCount, contacts] = await Promise.all([
@@ -39,8 +42,8 @@ export const getContacts = async ({
   };
 };
 
-export const getContactById = async (contactId) => {
-  const contact = await ContactsCollection.findById(contactId);
+export const getContactById = async (filter) => {
+  const contact = await ContactsCollection.findById(filter);
   return contact;
 };
 
@@ -68,7 +71,7 @@ export const updateContact = async (contactId, payload, options = {}) => {
   };
 };
 
-export const deleteContact = async (contactId) => {
-  const contact = await ContactsCollection.findOneAndDelete({ _id: contactId });
+export const deleteContact = async (filter) => {
+  const contact = await ContactsCollection.findOneAndDelete(filter);
   return contact;
 };

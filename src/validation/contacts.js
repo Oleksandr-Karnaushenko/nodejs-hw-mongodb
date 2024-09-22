@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import { contactTypeList } from '../constants/contacts.js';
+import { emailRegexp } from '../constants/user.js';
 
 export const createContactSchema = Joi.object({
   name: Joi.string().min(3).max(20).required().messages({
@@ -12,11 +13,11 @@ export const createContactSchema = Joi.object({
     'number.base': 'Contact phone number should be a number',
     'any.required': 'Contact phone number is required',
   }),
-  email: Joi.string().min(3).max(20).email().messages({
+  email: Joi.string().min(3).max(20).pattern(emailRegexp).messages({
     'string.base': 'Contact email should be a string',
     'string.min': 'Contact email should have at least {#limit} characters',
     'string.max': 'Contact email should have at most {#limit} characters',
-    'string.email': 'Contact email should be a email',
+    'string.pattern': 'Contact email should be a email',
   }),
   isFavourite: Joi.boolean(),
   contactType: Joi.string()
@@ -35,7 +36,7 @@ export const updateContactSchema = Joi.object({
     'number.base': 'Contact phone number should be a number',
     'any.required': 'Contact phone number is required',
   }),
-  email: Joi.string().email().min(3).max(20).messages({
+  email: Joi.string().pattern(emailRegexp).min(3).max(30).messages({
     'string.base': 'Contact email should be a string',
     'string.min': 'Contact email should have at least {#limit} characters',
     'string.max': 'Contact email should have at most {#limit} characters',
