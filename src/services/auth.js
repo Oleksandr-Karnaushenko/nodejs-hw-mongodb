@@ -2,9 +2,9 @@ import bcrypt from 'bcrypt';
 import createHttpError from 'http-errors';
 import { randomBytes } from 'crypto';
 
-import { UsersCollection } from '../db/models/User.js';
+import { UserCollection } from '../db/models/Users.js';
 import { FIFTEEN_MINUTES, THIRTY_DAY } from '../constants/index.js';
-import { SessionsCollection } from '../db/models/Session.js';
+import { SessionCollection } from '../db/models/Session.js';
 
 const createSession = () => {
   const accessToken = randomBytes(30).toString('base64');
@@ -21,7 +21,7 @@ const createSession = () => {
 };
 
 export const registerUser = async (payload) => {
-  const user = await UsersCollection.findOne({
+  const user = await UserCollection.findOne({
     email: payload.email,
   });
 
@@ -29,14 +29,14 @@ export const registerUser = async (payload) => {
 
   const encryptedPassword = await bcrypt.hash(payload.password, 10);
 
-  return await UsersCollection.create({
+  return await UserCollection.create({
     ...payload,
     password: encryptedPassword,
   });
 };
 
 export const loginUser = async (payload) => {
-  const user = await UsersCollection.findOne({
+  const user = await UserCollection.findOne({
     email: payload.email,
   });
   if (!user) throw createHttpError(401, 'Email or password invalid');
@@ -44,11 +44,11 @@ export const loginUser = async (payload) => {
   const correctPassword = await bcrypt.compare(payload.password, user.password);
   if (!correctPassword) throw createHttpError(401, 'Email or password invalid');
 
-  await SessionsCollection.deleteOne({ userId: user._id });
+  await SessionCollection.deleteOne({ userId: user._id });
 
   const newSession = createSession();
 
-  const userSession = await SessionsCollection.create({
+  const userSession = await SessionCollection.create({
     userId: user._id,
     ...newSession,
   });
@@ -57,7 +57,7 @@ export const loginUser = async (payload) => {
 };
 
 export const refreshUserSession = async ({ sessionId, refreshToken }) => {
-  const session = await SessionsCollection.findOne({
+  const session = await SessionCollection.findOne({
     _id: sessionId,
     refreshToken,
   });
@@ -75,14 +75,14 @@ export const refreshUserSession = async ({ sessionId, refreshToken }) => {
 
   const newSession = createSession();
 
-  await SessionsCollection.deleteOne({ _id: sessionId, refreshToken });
+  await SessionCollection.deleteOne({ _id: sessionId, refreshToken });
 
-  return await SessionsCollection.create({
+  return await SessionCollection.create({
     userId: session.userId,
     ...newSession,
   });
 };
 
 export const logoutUser = async (sessionId) => {
-  await SessionsCollection.deleteOne({ _id: sessionId });
+  await SessionCollection.deleteOne({ _id: sessionId });
 };

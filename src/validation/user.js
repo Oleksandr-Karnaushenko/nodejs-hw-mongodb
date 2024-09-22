@@ -1,6 +1,5 @@
 import Joi from 'joi';
 import { emailRegexp } from '../constants/user.js';
-import { ROLES } from '../constants/index.js';
 
 export const registerUserShema = Joi.object({
   name: Joi.string().required().min(3).max(30),
