@@ -30,4 +30,4 @@ const userShema = new Schema(
     versionKey: false,
   },
 );
-export const UserCollection = model('user', usersShema);
+export const UserCollection = model('user', userShema);
