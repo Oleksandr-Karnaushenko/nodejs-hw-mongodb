@@ -10,12 +10,18 @@ import {
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
 import { parseContactsFilterParams } from '../utils/filters/parseContactsFilterParams.js';
+import { ROLES } from '../constants/index.js';
 
 export const getContactsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
   const filter = parseContactsFilterParams(req.query);
-  const { _id: userId } = req.user;
+  let { _id: userId } = req.user;
+  const { role: role } = req.user;
+
+  if (role === ROLES.ADMIN) {
+    userId = null;
+  }
 
   const contacts = await getContacts({
     page,

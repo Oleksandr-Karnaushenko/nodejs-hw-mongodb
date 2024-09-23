@@ -29,10 +29,14 @@ export const registerUser = async (payload) => {
 
   const encryptedPassword = await bcrypt.hash(payload.password, 10);
 
-  return await UserCollection.create({
+  const data = await UserCollection.create({
     ...payload,
     password: encryptedPassword,
   });
+
+  delete data._doc.password;
+
+  return data;
 };
 
 export const loginUser = async (payload) => {
