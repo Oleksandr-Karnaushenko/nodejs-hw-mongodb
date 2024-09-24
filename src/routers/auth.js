@@ -14,7 +14,7 @@ import { loginUserShema, registerUserShema } from '../validation/user.js';
 const router = Router();
 
 router.post(
-  '/logup',
+  '/register',
   validateBody(registerUserShema),
   ctrlWrapper(registerUserController),
 );
