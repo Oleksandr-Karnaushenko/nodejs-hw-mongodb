@@ -23,7 +23,7 @@ export const SMTP = {
 };
 
 export const CLOUDINARY = {
-  CLOUD_NAME: 'CLOUD_NAME1',
+  CLOUD_NAME: 'CLOUD_NAME',
   API_KEY: 'API_KEY',
   API_SECRET: 'API_SECRET',
 };
