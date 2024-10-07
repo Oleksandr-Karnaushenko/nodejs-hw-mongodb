@@ -11,9 +11,6 @@ export const getContacts = async ({
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
-  console.log('objectsdsdsd');
-  console.log(filter);
-
   const contactsQuery = ContactCollection.find();
 
   if (filter.contactType) {
