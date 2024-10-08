@@ -36,10 +36,6 @@ requestBody:
             type: string
             enum: ['work', 'home', 'personal']
             example: work
-          userId:
-            description: "Contact's owner id"
-            type: string
-            example: 65e4decdd286b30065d54af9
           photo:
             description: "Contact's photo"
             type: string
@@ -66,6 +62,6 @@ responses:
               type: object
               $ref: '../../components/schemas/contacts.yaml'
   '401':
-    $ref: '../../components/responses/401.yaml'
+    $ref: '../../components/responses/contacts/401.yaml'
   '500':
     $ref: '../../components/responses/500.yaml'
