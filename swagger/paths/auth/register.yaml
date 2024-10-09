@@ -30,7 +30,7 @@ requestBody:
             description: "User's role"
             type: string
             enum: ['admin', 'user']
-            example: owner
+            example: user
 responses:
   '201':
     description: Creates a user

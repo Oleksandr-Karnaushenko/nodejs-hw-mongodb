@@ -13,7 +13,6 @@ requestBody:
         required:
           - name
           - phoneNumber
-          - userId
         properties:
           name:
             description: "Contact's name"

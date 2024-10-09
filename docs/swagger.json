@@ -200,8 +200,7 @@
                 "type": "object",
                 "required": [
                   "name",
-                  "phoneNumber",
-                  "userId"
+                  "phoneNumber"
                 ],
                 "properties": {
                   "name": {
@@ -539,7 +538,7 @@
                       "admin",
                       "user"
                     ],
-                    "example": "owner"
+                    "example": "user"
                   }
                 }
               }
